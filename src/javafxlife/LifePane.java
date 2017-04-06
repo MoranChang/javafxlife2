@@ -43,6 +43,7 @@ public class LifePane extends Pane {
     private final Canvas canvas;
     private final Timeline animation;
     private final Random gen = new Random();
+    private boolean showRed = true;
 
     public LifePane(Label lbStatus) {
         this.lbStatus = lbStatus;
@@ -166,16 +167,16 @@ public class LifePane extends Pane {
             for (int y = 0; y < yCellCount; y++) {
                 if (cells[x][y] == 0) {
                     g.setFill(Color.WHITE);
+                } else if (showColors) {
+                    int myBlue = gen.nextInt(255);
+                    int myGreen = gen.nextInt(255);
+                    int myRed = gen.nextInt(255);
+                    Color myColor = Color.rgb(myRed, myGreen, myBlue);
+                    g.setFill(myColor);
+                } else if (showRed) {
+                    g.setFill(Color.RED);
                 } else {
-                    if (showColors) {
-                        int myBlue = gen.nextInt(255);
-                        int myGreen = gen.nextInt(255);
-                        int myRed = gen.nextInt(255);
-                        Color myColor = Color.rgb(myRed, myGreen, myBlue);
-                        g.setFill(myColor);
-                    } else {
-                        g.setFill(Color.BLACK);
-                    }
+                    g.setFill(Color.BLACK);
                 }
                 g.fillRect(x * CELLWIDTH, y * CELLHEIGHT, CELLFILLWIDTH, CELLFILLHEIGHT);
             }
@@ -242,5 +243,13 @@ public class LifePane extends Pane {
 
     public boolean getShowColors() {
         return this.showColors;
+    }
+
+    public void Redred() {
+        if (showRed) {
+            showRed = false;
+        } else {
+            showRed = true;
+        }
     }
 }
