@@ -19,6 +19,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -66,8 +67,9 @@ public class JavaFXLife extends Application {
         final Menu speedMenu = new Menu("Speed");
         final Menu optionsMenu = new Menu("Options");
         final Menu helpMenu = new Menu("Help");
+         final Menu RedMenu = new Menu("Red");
 
-        myBar.getMenus().addAll(fileMenu, speedMenu, optionsMenu, helpMenu);
+        myBar.getMenus().addAll(fileMenu, speedMenu, optionsMenu, helpMenu, RedMenu);
 
         /**
          * *********************************************************************
@@ -108,6 +110,13 @@ public class JavaFXLife extends Application {
 
         exit.setOnAction(e -> System.exit(0));
         fileMenu.getItems().add(exit);
+        
+        /**
+         * Red
+         */
+         MenuItem colRed = new MenuItem("Red");
+        colRed.setOnAction(e -> lifePane.Redred());
+        RedMenu.getItems().add(colRed);
 
         /**
          * *********************************************************************
@@ -171,6 +180,14 @@ public class JavaFXLife extends Application {
          * *********************************************************************
          * Help Menu Section
          */
+         MenuItem MJC = new MenuItem("MJC");
+        MJC.setOnAction(e -> {
+            lifePane.pause();
+            lifePane.clearCells();
+            readFile(new File("MJC.txt"));
+            lifePane.drawCells();
+        });
+        helpMenu.getItems().add(MJC);
         
         MenuItem jp = new MenuItem("JP");
         jp.setOnAction(e -> {
